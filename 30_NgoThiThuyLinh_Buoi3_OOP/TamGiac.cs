@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Math;
+
 
 namespace _30_NgoThiThuyLinh_Buoi3_OOP
 {
@@ -19,8 +19,6 @@ namespace _30_NgoThiThuyLinh_Buoi3_OOP
             {
                 if (value < 0)
                     value = 0;
-                else if (value + mb < mc || value + mc < mb || value > mb + mc)
-                    value = 0;
             }
         }
         public int MB
@@ -29,8 +27,6 @@ namespace _30_NgoThiThuyLinh_Buoi3_OOP
             set
             {
                 if (value < 0)
-                    value = 0;
-                else if (value + ma < mc || value + mc < ma || value > ma + mc)
                     value = 0;
             }
         }
@@ -41,23 +37,21 @@ namespace _30_NgoThiThuyLinh_Buoi3_OOP
             {
                 if (value < 0)
                     value = 0;
-                else if (value + mb < ma || value + ma < mb || value > mb + ma)
-                    value = 0;
             }
         }
         //constructor khong tham so
         public TamGiac()
         {
-            ma = 1;
-            mb = 1;
-            mc = 1;
+            ma = 0;
+            mb = 0;
+            mc = 0;
         }
         //constructor co tham so
-        public TamGiac(int ma, int mb, int mc)
+        public TamGiac(int a, int b, int c)
         {
-            MA = ma;
-            MB = mb;
-            MC = mc;
+            ma = a;
+            mb = b;
+            mc = c;
         }
         public int ChuVi()
         {
@@ -68,11 +62,19 @@ namespace _30_NgoThiThuyLinh_Buoi3_OOP
             double p = (ma + mb + mc) / 2;
             return Math.Sqrt(p * (p - ma) * (p - mb) * (p - mc));
         }
-        public string ToString()
+        public string LoaiTamGiac()
         {
-            if (ma == mb && mb == mc && ma==mc)
+            if (ma == mb && mb == mc && ma == mc)
                 return "Tam Giac Deu";
-            else if(ma == mb || mb == mc || ma==mc)
+            else if ((ma == mb && mc != ma && mb != mc) || (mb == mc && mc != ma && mb != ma) || (ma == mc && mb != ma && mb != mc))
+                return "Tam Giac Can";
+            else if (Math.Pow(mb, 2) + Math.Pow(mc, 2) == Math.Pow(ma, 2) || Math.Pow(ma, 2) + Math.Pow(mb, 2) == Math.Pow(mc, 2) || Math.Pow(ma, 2) + Math.Pow(mc, 2) == Math.Pow(mb, 2))
+                return "Tam giac Vuong";
+            return "Tam Giac Thuong";
+        }
+        public string Xuat()
+        {
+            return ma.ToString()+'\t'+mb.ToString()+'\t'+mc+'\t'+LoaiTamGiac()+'\t'+ChuVi()+'\t'+DienTich();
         }
     }
 }
